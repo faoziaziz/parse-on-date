@@ -2,6 +2,12 @@
 
 Parsing::Parsing()
 {
+    qDebug()<<"Parsing constructor";
+}
+
+Parsing::~Parsing()
+{
+    qDebug()<<"Parsing destructior";
 
 }
 
@@ -11,8 +17,8 @@ void Parsing::test_parsing()
     QByteArray data;
 
     /* get file form database */
-
-
+    qDebug()<<"Parsing tested";
+    aksesDB->test_database();
 
 
 }
@@ -28,5 +34,4 @@ void Parsing::getCPUID()
     }
     this->CPU_ID = cpu_id_byte.toHex();
 }
-
 
