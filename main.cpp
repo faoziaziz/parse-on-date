@@ -7,9 +7,6 @@ int main(int argc, char *argv[])
 {
     /* Core application */
     QCoreApplication a(argc, argv);
-    Database aksesdb;
-
-    aksesdb.test_database();
 
 
 

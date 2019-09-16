@@ -3,12 +3,17 @@
 
 #include<QDebug>
 #include<QDateTime>
+#include "database.h"
 
 class Parsing
 {
 public:
     Parsing();
     ~Parsing();
+
+    void test_parsing();
+    void getCPUID();
+    Database *aksesDB;
 
 private:
     QByteArray data;

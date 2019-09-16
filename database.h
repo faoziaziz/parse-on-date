@@ -6,8 +6,14 @@ class Database
 {
 public:
     Database();
+    Database (QString s_username, QString s_password, QString s_database);
+    Database(QString s_hostname, int s_port, QString s_username, QString s_password, QString s_database);
     ~Database();
     void test_database();
+
+    void setConnection();
+    void closeConnection();
+
 private:
     QString hostname;
     QString username;
