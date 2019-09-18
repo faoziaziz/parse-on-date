@@ -238,14 +238,14 @@ void Parsing::letsWrite()
     query.bindValue(":DeviceId", NeiraParsd.DeviceId.isEmpty()?"":NeiraParsd.DeviceId);
     query.bindValue(":FileStamp", NeiraParsd.FileStamp);
     query.bindValue(":RefNeira", NeiraParsd.idNum);
-    query.bindValue(":nomerTransaksi", NeiraParsd.nomerTransaksi.isEmpty()?"":NeiraParsd.nomerTransaksi);
-    query.bindValue(":Tanggal", NeiraParsd.Tanggal.isEmpty()?"":NeiraParsd.Tanggal);
+    query.bindValue(":nomerTransaksi", NeiraParsd.nomerTransaksi.isEmpty()?"1":NeiraParsd.nomerTransaksi);
+    query.bindValue(":Tanggal", NeiraParsd.Tanggal.isEmpty()?"2":NeiraParsd.Tanggal);
     /* 6 */
-    query.bindValue(":Jam", NeiraParsd.Jam.isEmpty()?"":NeiraParsd.Jam);
-    query.bindValue(":NomerHP", NeiraParsd.NomerHP.isEmpty()?"":NeiraParsd.NomerHP);
-    query.bindValue(":TotalTrans", NeiraParsd.TotalTrans.isEmpty()?"":NeiraParsd.TotalTrans);
-    query.bindValue(":POS", NeiraParsd.POS.isEmpty()?"":NeiraParsd.POS);
-    query.bindValue(":Toko", NeiraParsd.Toko.isEmpty()?"":NeiraParsd.Toko);
+    query.bindValue(":Jam", NeiraParsd.Jam.isEmpty()?"3":NeiraParsd.Jam);
+    query.bindValue(":NomerHP", NeiraParsd.NomerHP.isEmpty()?"4":NeiraParsd.NomerHP);
+    query.bindValue(":TotalTrans", NeiraParsd.TotalTrans.isEmpty()?"5":NeiraParsd.TotalTrans);
+    query.bindValue(":POS", NeiraParsd.POS.isEmpty()?"6":NeiraParsd.POS);
+    query.bindValue(":Toko", NeiraParsd.Toko.isEmpty()?"7":NeiraParsd.Toko);
     /* 11 */
 
     qInfo()<<"Binding value";
