@@ -46,7 +46,18 @@ void Parsing::setDatabase()
     qDebug()<<"port     : "<<VarDataBase.port;
 
     VarDataBase.db.addDatabase("QMYSQL");
+
+    /* Setting to database */
+    VarDataBase.db.setHostName(VarDataBase.hostname);
+    VarDataBase.db.setUserName(VarDataBase.username);
+    VarDataBase.db.setPassword(VarDataBase.password);
+    VarDataBase.db.setDatabaseName(VarDataBase.database);
+    VarDataBase.db.setPort(VarDataBase.port);
+
+    /* for test connection */
     VarDataBase.ok = VarDataBase.db.open();
+
+
 
     if (VarDataBase.ok){
         qDebug()<<"Database established";
@@ -93,6 +104,8 @@ void Parsing::initParsing(int argc, char *argv[])
         VarDataBase.database=argv[3];
         VarDataBase.port=3306;
 
+        setDatabase();
+
 
     }
     else if(argc==6){
@@ -103,6 +116,7 @@ void Parsing::initParsing(int argc, char *argv[])
         VarDataBase.username=argv[2];
         VarDataBase.password=argv[3];
         VarDataBase.database=argv[4];
+
         /* For casting char to int*/
         QString port_string=argv[5];
         VarDataBase.port=port_string.toInt();
