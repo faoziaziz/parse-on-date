@@ -34,6 +34,7 @@ class NeiraProfile {
     QString PatternToko;
     QString PatterNoTransaksi;
     QString PatternQRString;
+    QByteArray dataTrans;
 };
 
 class NeiraParsed {
