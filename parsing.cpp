@@ -302,16 +302,19 @@ void Parsing::letsCombine()
     QRegularExpression RegexToko("("+NeiraProf.PatternToko+")");
     QRegularExpression RegexQRString("("+NeiraProf.PatternQRString+")");
 
-    NeiraParsd.nomerTransaksi = RegexNoTrans.match(this->data.toString()).captured(RegexNoTrans.match(this->data).lastCapturedIndex());
-    qInfo()<<"datanya :"<<this->data;
-    NeiraParsd.Tanggal = RegexTanggal.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
-    NeiraParsd.Jam = RegexJam.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
+    QString tempData;
+    tempData = this->data;
+    qDebug()<<"Temp Data : "<<tempData;
+    NeiraParsd.nomerTransaksi = RegexNoTrans.match(tempData).captured(RegexNoTrans.match(tempData).lastCapturedIndex());
+    qInfo()<<"datanya :"<<tempData;
+    NeiraParsd.Tanggal = RegexTanggal.match(tempData).captured(RegexTanggal.match(tempData).lastCapturedIndex());
+    NeiraParsd.Jam = RegexJam.match(tempData).captured(RegexTanggal.match(tempData).lastCapturedIndex());
     qDebug()<<"Jamilah :"<<NeiraParsd.Jam;
-    NeiraParsd.NomerHP = RegexHP.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
-    NeiraParsd.TotalTrans = RegexTotalTrans.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
-    NeiraParsd.POS = RegexPOS.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
-    NeiraParsd.Toko = RegexToko.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
-    NeiraParsd.QRString = RegexQRString.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
+    NeiraParsd.NomerHP = RegexHP.match(tempData).captured(RegexTanggal.match(tempData).lastCapturedIndex());
+    NeiraParsd.TotalTrans = RegexTotalTrans.match(tempData).captured(RegexTanggal.match(tempData).lastCapturedIndex());
+    NeiraParsd.POS = RegexPOS.match(tempData).captured(RegexTanggal.match(tempData).lastCapturedIndex());
+    NeiraParsd.Toko = RegexToko.match(tempData).captured(RegexTanggal.match(tempData).lastCapturedIndex());
+    NeiraParsd.QRString = RegexQRString.match(tempData).captured(RegexTanggal.match(tempData).lastCapturedIndex());
 
 }
 
