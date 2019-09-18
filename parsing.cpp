@@ -40,6 +40,11 @@ void Parsing::setDatabase()
 {
     //VarDataBase->db.addDatabase("QMSQL");
     qDebug()<<"hostname : "<<VarDataBase.hostname;
+    qDebug()<<"username : "<<VarDataBase.username;
+    qDebug()<<"password : "<<VarDataBase.password;
+    qDebug()<<"database : "<<VarDataBase.database;
+    qDebug()<<"port     : "<<VarDataBase.port;
+
 
 }
 
@@ -83,6 +88,7 @@ void Parsing::initParsing(int argc, char *argv[])
         QString port_string=argv[5];
         VarDataBase.port=port_string.toInt();
 
+        setDatabase();
 
         /* Set connection */
     }
