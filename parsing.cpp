@@ -38,23 +38,22 @@ void Parsing::getCPUID()
 
 void Parsing::setDatabase()
 {
-    //VarDataBase->db.addDatabase("QMSQL");
+    /* just to show the connection */
     qDebug()<<"hostname : "<<VarDataBase.hostname;
     qDebug()<<"username : "<<VarDataBase.username;
     qDebug()<<"password : "<<VarDataBase.password;
     qDebug()<<"database : "<<VarDataBase.database;
     qDebug()<<"port     : "<<VarDataBase.port;
 
-    VarDataBase.db.addDatabase("QMSQL");
+    VarDataBase.db.addDatabase("QMYSQL");
     VarDataBase.ok = VarDataBase.db.open();
 
     if (VarDataBase.ok){
         qDebug()<<"Database established";
     } else {
         qDebug()<<"Database not established";
+        // this line should be quit application
     }
-
-
 
 }
 
@@ -86,7 +85,17 @@ void Parsing::initParsing(int argc, char *argv[])
         qDebug()<<"lol";
         setDatabase();
 
-    } else if(argc==6){
+    } else if(argc==4){
+        qDebug()<<"For argc =  "<<argc;
+        VarDataBase.hostname="localhost";
+        VarDataBase.username=argv[1];
+        VarDataBase.password=argv[2];
+        VarDataBase.database=argv[3];
+        VarDataBase.port=3306;
+
+
+    }
+    else if(argc==6){
 
         /* Normal mode */
         qDebug()<<"argc = 6";

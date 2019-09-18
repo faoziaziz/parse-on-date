@@ -4,6 +4,8 @@
 #include<QDebug>
 #include<QDateTime>
 #include "database.h"
+#include <QCoreApplication>
+
 
 class Parsing
 {

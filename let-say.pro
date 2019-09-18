@@ -30,3 +30,6 @@ HEADERS += \
     database.h \
     parsing.h \
     variable.h
+
+DISTFILES += \
+    README.md
