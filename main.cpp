@@ -8,7 +8,10 @@ int main(int argc, char *argv[])
     /* Core application */
     QCoreApplication a(argc, argv);
     Parsing AccParsing;
-    AccParsing.test_parsing();
+    AccParsing.initParsing(argc, argv);
+    //AccParsing.startParsing();
+
+
 
 
 

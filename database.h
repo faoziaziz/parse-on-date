@@ -1,25 +1,32 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 #include <QDebug>
+#include <QDateTime>
+#include <QSql>
+#include <QSqlDatabase>
+#include "variable.h"
+
+
 
 class Database
 {
 public:
     Database();
-    Database (QString s_username, QString s_password, QString s_database);
-    Database(QString s_hostname, int s_port, QString s_username, QString s_password, QString s_database);
+
+    /* Destructor */
     ~Database();
+
     void test_database();
 
-    void setConnection();
+    /* Set connection */
+    void setConnection(DbVar *VariableDB);
+
+    /* Close connection maybe should be inserted on Destructor*/
     void closeConnection();
 
-private:
-    QString hostname;
-    QString username;
-    QString password;
-    int port;
-    QString database;
+    /* Variable for database connection */
+
+public:
 
 };
 

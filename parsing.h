@@ -13,7 +13,13 @@ public:
 
     void test_parsing();
     void getCPUID();
+    void setDatabase();
+    void startParsing();
+    void initParsing(int argc, char *argv[]);
+
+
     Database *aksesDB;
+    DbVar VarDataBase;
 
 private:
     QByteArray data;
@@ -29,5 +35,7 @@ private:
     int RefNeira;
     QDateTime TimeStamp;
 };
+
+
 
 #endif // PARSING_H
