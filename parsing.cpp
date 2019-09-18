@@ -273,7 +273,9 @@ void Parsing::getPattern()
     if(!query.exec()){
         qDebug()<<"Query cant exec on getPattern ";
     } else {
+        NeiraProf.PatterNoTransaksi=query.value(4).toString();
         NeiraProf.PatternTanggal=query.value(5).toString();
+        qDebug()<<NeiraProf.PatternTanggal;
         NeiraProf.PatternJam=query.value(6).toString();
         NeiraProf.PatternHP = query.value(7).toString();
         NeiraProf.PatternTotalTrans=query.value(8).toString();
