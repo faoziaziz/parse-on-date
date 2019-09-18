@@ -64,6 +64,7 @@ void Parsing::setDatabase()
 
     if (VarDataBase.ok){
         qDebug()<<"Database established";
+        startParsing();
     } else {
         qDebug()<<"Database not established";
         // this line should be quit application
@@ -73,18 +74,37 @@ void Parsing::setDatabase()
 
 void Parsing::startParsing()
 {
+    /* get data from table */
+    qInfo()<<"Connected an now to get the database ";
 
-    /* read from argc argv */
-    /* go to conection to mysql */
+    /* Variable needed */
+    QSqlQuery query;
+    QString cmd;
 
+    /* Get data */
+    cmd = "SELECT * FROM Trumon.NeiraRecv WHERE parsed = 0";
+
+    /* fetch all */
+
+    if(!query.exec(cmd)){
+        qInfo()<<"some error";
+    }
+    else {
+        /* get row */
+        while(query.next()){
+            int id = query.value(0).toInt();
+
+            qInfo()<<"id : "<<id;
+        }
+    }
+
+    VarDataBase.db.close();
 
 
 }
 
 void Parsing::initParsing(int argc, char *argv[])
 {
-
-
     if (argc==1){
 
         /* Default mode */

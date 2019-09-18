@@ -4,6 +4,7 @@
 #include <QDateTime>
 #include <QSql>
 #include <QSqlDatabase>
+#include <QSqlQuery>
 #include "variable.h"
 
 
