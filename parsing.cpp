@@ -292,28 +292,38 @@ void Parsing::getPattern()
 
 void Parsing::letsCombine()
 {
-    QRegularExpression RegexNoTrans("("+NeiraProf.PatterNoTransaksi+")");
-    QRegularExpression RegexTanggal("("+NeiraProf.PatternTanggal+")");
+    QRegularExpression RegexNoTrans;
+    QRegularExpression RegexTanggal;
     qDebug()<<"patern jam : "<<NeiraProf.PatternTanggal;
-    QRegularExpression RegexJam("("+NeiraProf.PatternJam+")");
+    QRegularExpression RegexJam;
     qDebug()<<"Pattern tanggal "<<NeiraProf.PatternTanggal;
-    QRegularExpression RegexHP("("+NeiraProf.PatternHP+")");
-    QRegularExpression RegexTotalTrans("("+NeiraProf.PatternTotalTrans+")");
-    QRegularExpression RegexPOS("("+NeiraProf.PatternPOS+")");
-    QRegularExpression RegexToko("("+NeiraProf.PatternToko+")");
-    QRegularExpression RegexQRString("("+NeiraProf.PatternQRString+")");
+    QRegularExpression RegexHP;
+    QRegularExpression RegexTotalTrans;
+    QRegularExpression RegexPOS;
+    QRegularExpression RegexToko;
+    QRegularExpression RegexQRString;
+
+    RegexNoTrans.setPattern(NeiraProf.PatterNoTransaksi);
+    RegexTanggal.setPattern(NeiraProf.PatternTanggal);
+    RegexJam.setPattern(NeiraProf.PatternJam);
+    RegexHP.setPattern(NeiraProf.PatternHP);
+    RegexTotalTrans.setPattern(NeiraProf.PatternTotalTrans);
+    RegexPOS.setPattern(NeiraProf.PatternPOS);
+    RegexToko.setPattern(NeiraProf.PatternToko);
+    RegexQRString.setPattern(NeiraProf.PatternQRString);
 
 
     NeiraParsd.nomerTransaksi = RegexNoTrans.match(this->data).captured(RegexNoTrans.match(this->data).lastCapturedIndex());
-    qInfo()<<"datanya :"<<this->data;
+
     NeiraParsd.Tanggal = RegexTanggal.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
-    NeiraParsd.Jam = RegexJam.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
+    NeiraParsd.Jam = RegexJam.match(this->data).captured(RegexJam.match(this->data).lastCapturedIndex());
     qDebug()<<"Jamilah :"<<NeiraParsd.Jam;
-    NeiraParsd.NomerHP = RegexHP.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
-    NeiraParsd.TotalTrans = RegexTotalTrans.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
-    NeiraParsd.POS = RegexPOS.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
-    NeiraParsd.Toko = RegexToko.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
-    NeiraParsd.QRString = RegexQRString.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
+    qDebug()<<"Regexcx "<<RegexJam.match(this->data);
+    NeiraParsd.NomerHP = RegexHP.match(this->data).captured(RegexHP.match(this->data).lastCapturedIndex());
+    NeiraParsd.TotalTrans = RegexTotalTrans.match(this->data).captured(RegexTotalTrans.match(this->data).lastCapturedIndex());
+    NeiraParsd.POS = RegexPOS.match(this->data).captured(RegexPOS.match(this->data).lastCapturedIndex());
+    NeiraParsd.Toko = RegexToko.match(this->data).captured(RegexToko.match(this->data).lastCapturedIndex());
+    NeiraParsd.QRString = RegexQRString.match(this->data).captured(RegexQRString.match(this->data).lastCapturedIndex());
 
 }
 
