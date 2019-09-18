@@ -96,6 +96,7 @@ void Parsing::startParsing()
             NeiraParsd.idNum = this->RefNeira;
 
             this->data = query.value(1).toByteArray();
+            qDebug()<<"Datanya"<<this->data;
             this->TimeStamp = query.value(2).toDateTime();
 
             NeiraParsd.FileStamp=this->TimeStamp;
@@ -292,7 +293,7 @@ void Parsing::getPattern()
 void Parsing::letsCombine()
 {
     QRegularExpression RegexNoTrans("("+NeiraProf.PatterNoTransaksi+")");
-    QRegularExpression RegexTanggal("("+NeiraProf.PatternTanggal+")");;
+    QRegularExpression RegexTanggal("("+NeiraProf.PatternTanggal+")");
     QRegularExpression RegexJam("("+NeiraProf.PatternJam+")");
     QRegularExpression RegexHP("("+NeiraProf.PatternHP+")");
     QRegularExpression RegexTotalTrans("("+NeiraProf.PatternTotalTrans+")");
@@ -301,10 +302,10 @@ void Parsing::letsCombine()
     QRegularExpression RegexQRString("("+NeiraProf.PatternQRString+")");
 
     NeiraParsd.nomerTransaksi = RegexNoTrans.match(this->data).captured(RegexNoTrans.match(this->data).lastCapturedIndex());
-    qInfo()<<this->data;
+    qInfo()<<"datanya :"<<this->data;
     NeiraParsd.Tanggal = RegexTanggal.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
     NeiraParsd.Jam = RegexJam.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
-    qDebug()<<NeiraParsd.Jam;
+    qDebug()<<"Jamilah :"<<NeiraParsd.Jam;
     NeiraParsd.NomerHP = RegexHP.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
     NeiraParsd.TotalTrans = RegexTotalTrans.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
     NeiraParsd.POS = RegexPOS.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
