@@ -100,6 +100,8 @@ void Parsing::startParsing()
             NeiraParsd.FileStamp=this->TimeStamp;
 
             qInfo()<<"id : "<<this->RefNeira<<" DateTime : "<<this->TimeStamp;
+
+
             compareCPUid();
             if(VarDataBase.registeredCPUID){
                 qInfo()<<"Registered";
@@ -112,6 +114,8 @@ void Parsing::startParsing()
                 this->CPU_ID;
                 qInfo()<<"not registered";
             }
+            /* for restoring just like destructor*/
+            setDefault();
         }
     }
 
@@ -231,7 +235,17 @@ void Parsing::letsWrite()
     query.bindValue(":FileStamp", NeiraParsd.FileStamp);
     query.bindValue(":RefNeira", NeiraParsd.idNum);
     query.exec();
+
+
 }
+
+void Parsing::setDefault()
+{
+    VarDataBase.registeredCPUID=false;
+
+}
+
+
 
 
 
