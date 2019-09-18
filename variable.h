@@ -16,6 +16,7 @@ public:
     QString password;
     QString database;
     bool ok;
+    bool registeredCPUID=false;
 };
 
 class NeiraProfile {

@@ -18,10 +18,13 @@ public:
     void setDatabase();
     void startParsing();
     void initParsing(int argc, char *argv[]);
+    void compareCPUid();
 
 
     Database *aksesDB;
     DbVar VarDataBase;
+    NeiraProfile NeiraProf;
+    NeiraParsed NeiraParsd;
 
 private:
     QByteArray data;

@@ -97,7 +97,13 @@ void Parsing::startParsing()
             this->TimeStamp = query.value(2).toDateTime();
 
             qInfo()<<"id : "<<this->RefNeira<<" DateTime : "<<this->TimeStamp;
-
+            compareCPUid();
+            if(VarDataBase.registeredCPUID){
+                qInfo()<<"Registered";
+            }
+            else{
+                qInfo()<<"not registered";
+            }
         }
     }
 
@@ -157,6 +163,33 @@ void Parsing::initParsing(int argc, char *argv[])
         qDebug()<<"argc = "<<argc;
 
         /* Set connection */
+    }
+
+}
+
+void Parsing::compareCPUid()
+{
+    /* Query Declare */
+
+    QSqlQuery query;
+    QString cmd;
+    QString tempCPUID;
+
+    /*Get CPUID*/
+    getCPUID();
+    cmd = "SELECT * FROM Trumon.NeiraRecvProfile WHERE RegStatus = 1";
+    if(!query.exec(cmd)){
+        qInfo()<<"Something error";
+    } else {
+
+        while(query.next()){
+            tempCPUID =  query.value(1).toString();
+            if(tempCPUID==this->CPU_ID){
+                VarDataBase.registeredCPUID=true;
+                qDebug()<<"Wew CPUID : "<<tempCPUID;
+            }
+        }
+
     }
 
 }
