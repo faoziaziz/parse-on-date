@@ -95,7 +95,7 @@ void Parsing::startParsing()
             this->RefNeira = query.value(0).toInt();
             NeiraParsd.idNum = this->RefNeira;
 
-            this->data = query.value(1).toByteArray();
+            this->data = query.value(1).toString();
             qDebug()<<"Datanya"<<this->data;
             this->TimeStamp = query.value(2).toDateTime();
 
@@ -295,6 +295,7 @@ void Parsing::letsCombine()
     QRegularExpression RegexNoTrans("("+NeiraProf.PatterNoTransaksi+")");
     QRegularExpression RegexTanggal("("+NeiraProf.PatternTanggal+")");
     QRegularExpression RegexJam("("+NeiraProf.PatternJam+")");
+    qDebug()<<"Pattern tanggal "<<NeiraProf.PatternTanggal;
     QRegularExpression RegexHP("("+NeiraProf.PatternHP+")");
     QRegularExpression RegexTotalTrans("("+NeiraProf.PatternTotalTrans+")");
     QRegularExpression RegexPOS("("+NeiraProf.PatternPOS+")");
