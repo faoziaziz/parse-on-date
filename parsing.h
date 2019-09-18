@@ -33,7 +33,7 @@ public:
     NeiraParsed NeiraParsd;
 
 private:
-    QString data;
+    QByteArray data;
     QString CPU_ID;
     QString DeviceId;
     QString Tanggal;

@@ -302,7 +302,7 @@ void Parsing::letsCombine()
     QRegularExpression RegexToko("("+NeiraProf.PatternToko+")");
     QRegularExpression RegexQRString("("+NeiraProf.PatternQRString+")");
 
-    NeiraParsd.nomerTransaksi = RegexNoTrans.match(this->data.toString()).captured(RegexNoTrans.match(this->data).lastCapturedIndex());
+    NeiraParsd.nomerTransaksi = RegexNoTrans.match(this->data.toString().captured(RegexNoTrans.match(this->data).lastCapturedIndex());
     qInfo()<<"datanya :"<<this->data;
     NeiraParsd.Tanggal = RegexTanggal.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
     NeiraParsd.Jam = RegexJam.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
