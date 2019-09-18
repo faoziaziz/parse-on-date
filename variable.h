@@ -37,6 +37,8 @@ class NeiraProfile {
 };
 
 class NeiraParsed {
+
+public:
   int idNum;
   QString DeviceId;
   QDateTime FileStamp;

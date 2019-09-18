@@ -93,15 +93,23 @@ void Parsing::startParsing()
         /* get row */
         while(query.next()){
             this->RefNeira = query.value(0).toInt();
+            NeiraParsd.idNum = this->RefNeira;
+
             this->data = query.value(1).toByteArray();
             this->TimeStamp = query.value(2).toDateTime();
+            NeiraParsd.FileStamp=this->TimeStamp;
 
             qInfo()<<"id : "<<this->RefNeira<<" DateTime : "<<this->TimeStamp;
             compareCPUid();
             if(VarDataBase.registeredCPUID){
                 qInfo()<<"Registered";
+
+                /* Lets Parse !!!!!!!!!!!!! */
+                letsParse();
+
             }
             else{
+                this->CPU_ID;
                 qInfo()<<"not registered";
             }
         }
@@ -183,14 +191,47 @@ void Parsing::compareCPUid()
     } else {
 
         while(query.next()){
-            tempCPUID =  query.value(1).toString();
+            tempCPUID =  query.value(2).toString();
             if(tempCPUID==this->CPU_ID){
                 VarDataBase.registeredCPUID=true;
                 qDebug()<<"Wew CPUID : "<<tempCPUID;
+
+                /* get DeviceID */
+                NeiraParsd.DeviceId = query.value(1).toString();
+                NeiraProf.DeviceId  = query.value(1).toString();
+
+            }
+            else{
+                qDebug()<<"thisCPUID : "<<this->CPU_ID<<" tempCPUID : "<<tempCPUID;
             }
         }
 
     }
 
 }
+
+void Parsing::letsParse()
+{
+    /* get pattern */
+
+    /* Combine Pattern with data */
+
+    /* write to parsed */
+    letsWrite();
+}
+
+void Parsing::letsWrite()
+{
+    /* to write in parsed table */
+    QSqlQuery query;
+    QString cmd;
+    cmd = "INSERT INTO Trumon.NeiraParsed (DeviceId, FileStamp, RefNeira) VALUE (:DeviceId, :FileStamp, :RefNeira)";
+    query.prepare(cmd);
+    query.bindValue(":DeviceId", NeiraParsd.DeviceId);
+    query.bindValue(":FileStamp", NeiraParsd.FileStamp);
+    query.bindValue(":RefNeira", NeiraParsd.idNum);
+    query.exec();
+}
+
+
 

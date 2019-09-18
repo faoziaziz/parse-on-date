@@ -19,6 +19,8 @@ public:
     void startParsing();
     void initParsing(int argc, char *argv[]);
     void compareCPUid();
+    void letsParse();
+    void letsWrite();
 
 
     Database *aksesDB;
