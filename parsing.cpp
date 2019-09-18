@@ -249,7 +249,7 @@ void Parsing::letsWrite()
     /* 11 */
 
     qInfo()<<"Binding value";
-    query.bindValue(":QRString", NeiraParsd.QRString.isEmpty()?"":NeiraParsd.QRString);
+    query.bindValue(":QRString", NeiraParsd.QRString.isEmpty()?"8":NeiraParsd.QRString);
     query.exec();
 
 
