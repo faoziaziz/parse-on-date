@@ -48,6 +48,9 @@ void Parsing::setDatabase()
     VarDataBase.db.addDatabase("QMYSQL");
 
     /* Setting to database */
+
+    qDebug()<<"setting database";
+
     VarDataBase.db.setHostName(VarDataBase.hostname);
     VarDataBase.db.setUserName(VarDataBase.username);
     VarDataBase.db.setPassword(VarDataBase.password);
