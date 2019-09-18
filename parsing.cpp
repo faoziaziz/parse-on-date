@@ -45,7 +45,7 @@ void Parsing::setDatabase()
     qDebug()<<"database : "<<VarDataBase.database;
     qDebug()<<"port     : "<<VarDataBase.port;
 
-    VarDataBase.db.addDatabase("QMYSQL");
+    VarDataBase.db = QSqlDatabase::addDatabase("QMYSQL");
 
     /* Setting to database */
 
