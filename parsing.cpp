@@ -45,6 +45,16 @@ void Parsing::setDatabase()
     qDebug()<<"database : "<<VarDataBase.database;
     qDebug()<<"port     : "<<VarDataBase.port;
 
+    VarDataBase.db.addDatabase("QMSQL");
+    VarDataBase.ok = VarDataBase.db.open();
+
+    if (VarDataBase.ok){
+        qDebug()<<"Database established";
+    } else {
+        qDebug()<<"Database not established";
+    }
+
+
 
 }
 
