@@ -234,16 +234,21 @@ void Parsing::letsWrite()
     QString cmd;
     cmd = "INSERT INTO NeiraParsed (DeviceId, FileStamp, RefNeira, nomerTransaksi, Tanggal, Jam, NomerHP, TotalTrans, POS, Toko, QRString) VALUE (:DeviceId, :FileStamp, :RefNeira, :nomerTransaksi, :Tanggal,  :Jam, :NomerHP, :TotalTrans, :POS, :Toko, :QRString)";
     query.prepare(cmd);
+    /* 1 */
     query.bindValue(":DeviceId", NeiraParsd.DeviceId.isEmpty()?"":NeiraParsd.DeviceId);
     query.bindValue(":FileStamp", NeiraParsd.FileStamp);
     query.bindValue(":RefNeira", NeiraParsd.idNum);
     query.bindValue(":nomerTransaksi", NeiraParsd.nomerTransaksi.isEmpty()?"":NeiraParsd.nomerTransaksi);
     query.bindValue(":Tanggal", NeiraParsd.Tanggal.isEmpty()?"":NeiraParsd.Tanggal);
+    /* 6 */
     query.bindValue(":Jam", NeiraParsd.Jam.isEmpty()?"":NeiraParsd.Jam);
     query.bindValue(":NomerHP", NeiraParsd.NomerHP.isEmpty()?"":NeiraParsd.NomerHP);
     query.bindValue(":TotalTrans", NeiraParsd.TotalTrans.isEmpty()?"":NeiraParsd.TotalTrans);
     query.bindValue(":POS", NeiraParsd.POS.isEmpty()?"":NeiraParsd.POS);
     query.bindValue(":Toko", NeiraParsd.Toko.isEmpty()?"":NeiraParsd.Toko);
+    /* 11 */
+
+    qInfo()<<"Binding value";
     query.bindValue(":QRString", NeiraParsd.QRString.isEmpty()?"":NeiraParsd.QRString);
     query.exec();
 
