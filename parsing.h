@@ -5,6 +5,7 @@
 #include<QDateTime>
 #include "database.h"
 #include <QCoreApplication>
+#include <QRegularExpression>
 
 
 class Parsing
@@ -22,6 +23,8 @@ public:
     void letsParse();
     void letsWrite();
     void setDefault();
+    void getPattern();
+    void letsCombine();
 
 
     Database *aksesDB;
@@ -39,6 +42,7 @@ private:
     QString TotalTrans;
     QString POS;
     QString Toko;
+    QString nomerTransaksi;
     QString QRString;
     int RefNeira;
     QDateTime TimeStamp;

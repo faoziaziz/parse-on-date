@@ -97,13 +97,14 @@ void Parsing::startParsing()
 
             this->data = query.value(1).toByteArray();
             this->TimeStamp = query.value(2).toDateTime();
+
             NeiraParsd.FileStamp=this->TimeStamp;
 
             qInfo()<<"id : "<<this->RefNeira<<" DateTime : "<<this->TimeStamp;
 
 
             compareCPUid();
-            if(VarDataBase.registeredCPUID){
+            if(VarDataBase.registeredCPUID ){
                 qInfo()<<"Registered";
 
                 /* Lets Parse !!!!!!!!!!!!! */
@@ -217,8 +218,10 @@ void Parsing::compareCPUid()
 void Parsing::letsParse()
 {
     /* get pattern */
+    getPattern();
 
     /* Combine Pattern with data */
+    letsCombine();
 
     /* write to parsed */
     letsWrite();
@@ -229,11 +232,19 @@ void Parsing::letsWrite()
     /* to write in parsed table */
     QSqlQuery query;
     QString cmd;
-    cmd = "INSERT INTO Trumon.NeiraParsed (DeviceId, FileStamp, RefNeira) VALUE (:DeviceId, :FileStamp, :RefNeira)";
+    cmd = "INSERT INTO NeiraParsed (DeviceId, FileStamp, RefNeira, nomerTransaksi, Tanggal, Jam, NomerHP, TotalTrans, POS, Toko, QRString) VALUE (:DeviceId, :FileStamp, :RefNeira, :nomerTransaksi, :Tanggal,  :Jam, :NomerHP, :TotalTrans, :POS, :Toko, :QRString)";
     query.prepare(cmd);
     query.bindValue(":DeviceId", NeiraParsd.DeviceId);
     query.bindValue(":FileStamp", NeiraParsd.FileStamp);
     query.bindValue(":RefNeira", NeiraParsd.idNum);
+    query.bindValue(":nomerTransaksi", NeiraParsd.nomerTransaksi);
+    query.bindValue(":Tanggal", NeiraParsd.Tanggal);
+    query.bindValue(":Jam", NeiraParsd.Jam);
+    query.bindValue(":NomerHP", NeiraParsd.NomerHP);
+    query.bindValue(":TotalTrans", NeiraParsd.TotalTrans);
+    query.bindValue(":POS", NeiraParsd.POS);
+    query.bindValue(":Toko", NeiraParsd.Toko);
+    query.bindValue(":QRString", NeiraParsd.QRString);
     query.exec();
 
 
@@ -241,7 +252,51 @@ void Parsing::letsWrite()
 
 void Parsing::setDefault()
 {
+    /* The default mode */
     VarDataBase.registeredCPUID=false;
+
+}
+
+void Parsing::getPattern()
+{
+    QSqlQuery query;
+    QString cmd;
+    cmd = "SELECT * FROM NeiraRecvProfile WHERE DeviceId = :DeviceId ";
+    query.prepare(cmd);
+    query.bindValue(":DeviceId", NeiraProf.DeviceId);
+
+    if(!query.exec()){
+        qDebug()<<"Query cant exec on getPattern ";
+    } else {
+        NeiraProf.PatternTanggal=query.value(5).toString();
+        NeiraProf.PatternJam=query.value(6).toString();
+        NeiraProf.PatternHP = query.value(7).toString();
+        NeiraProf.PatternTotalTrans=query.value(8).toString();
+        NeiraProf.PatternPOS = query.value(9).toString();
+        NeiraProf.PatternToko = query.value(10).toString();
+        NeiraProf.PatternQRString = query.value(11).toString();
+    }
+    //NeiraProf.PatternTanggal;
+
+}
+
+void Parsing::letsCombine()
+{
+    QRegularExpression RegexTanggal("("+NeiraProf.PatternTanggal+")");;
+    QRegularExpression RegexJam("("+NeiraProf.PatternJam+")");
+    QRegularExpression RegexHP("("+NeiraProf.PatternHP+")");
+    QRegularExpression RegexTotalTrans("("+NeiraProf.PatternTotalTrans+")");
+    QRegularExpression RegexPOS("("+NeiraProf.PatternPOS+")");
+    QRegularExpression RegexToko("("+NeiraProf.PatternToko+")");
+    QRegularExpression RegexQRString("("+NeiraProf.PatternQRString+")");
+
+    NeiraParsd.Tanggal = RegexTanggal.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
+    NeiraParsd.Jam = RegexJam.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
+    NeiraParsd.NomerHP = RegexHP.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
+    NeiraParsd.TotalTrans = RegexTotalTrans.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
+    NeiraParsd.POS = RegexPOS.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
+    NeiraParsd.Toko = RegexToko.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
+    NeiraParsd.QRString = RegexQRString.match(this->data).captured(RegexTanggal.match(this->data).lastCapturedIndex());
 
 }
 

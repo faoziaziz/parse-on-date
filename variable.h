@@ -48,10 +48,9 @@ public:
   QString NomerHP;
   QString TotalTrans;
   QString POS;
-  QString toko;
-
+  QString Toko;
   QString QRString;
-
+  QString nomerTransaksi;
 };
 
 
