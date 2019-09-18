@@ -92,9 +92,12 @@ void Parsing::startParsing()
     else {
         /* get row */
         while(query.next()){
-            int id = query.value(0).toInt();
+            this->RefNeira = query.value(0).toInt();
+            this->data = query.value(1).toByteArray();
+            this->TimeStamp = query.value(2).toDateTime();
 
-            qInfo()<<"id : "<<id;
+            qInfo()<<"id : "<<this->RefNeira<<" DateTime : "<<this->TimeStamp;
+
         }
     }
 
