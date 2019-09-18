@@ -292,9 +292,14 @@ void Parsing::getPattern()
 
 void Parsing::letsCombine()
 {
+    for(int iter=0;iter<this->data.size();iter++){
+        if(this->data.at(iter)==0)
+            this->data[iter]=' ';
+    }
+
     QRegularExpression RegexNoTrans;
     QRegularExpression RegexTanggal;
-    qDebug()<<"patern jam : "<<NeiraProf.PatternTanggal;
+    qDebug()<<"patern jam : "<<NeiraProf.PatternJam;
     QRegularExpression RegexJam;
     qDebug()<<"Pattern tanggal "<<NeiraProf.PatternTanggal;
     QRegularExpression RegexHP;
