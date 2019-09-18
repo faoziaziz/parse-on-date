@@ -21,6 +21,7 @@ public:
     void compareCPUid();
     void letsParse();
     void letsWrite();
+    void setDefault();
 
 
     Database *aksesDB;
