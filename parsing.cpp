@@ -227,6 +227,13 @@ void Parsing::letsParse()
 
     /* write to parsed */
     letsWrite();
+
+    /* reduce counting */
+
+    reduceCounting();
+
+    /* update flag */
+    updateFlagParsed();
 }
 
 void Parsing::letsWrite()
@@ -331,6 +338,59 @@ void Parsing::letsCombine()
     NeiraParsd.POS = RegexPOS.match(NeiraProf.dataTrans).captured(RegexPOS.match(NeiraProf.dataTrans).lastCapturedIndex());
     NeiraParsd.Toko = RegexToko.match(NeiraProf.dataTrans).captured(RegexToko.match(NeiraProf.dataTrans).lastCapturedIndex());
     NeiraParsd.QRString = RegexQRString.match(NeiraProf.dataTrans).captured(RegexQRString.match(NeiraProf.dataTrans).lastCapturedIndex());
+
+}
+
+void Parsing::updateFlagParsed()
+{
+    /* update flag parser function  */
+    QSqlQuery query;
+    QString cmd;
+
+    cmd = "UPDATE * FROM NeiraRecv WHERE id = :idNum";
+    query.prepare(cmd);
+
+    query.bindValue(cmd, NeiraParsd.idNum);
+
+    if(!query.exec()){
+        qInfo()<<"update flag parsed on NeiraParsed failed";
+    }
+    else {
+        qInfo()<<"Neira Parsed success to write";
+    }
+
+}
+
+void Parsing::reduceCounting()
+{
+    /* for reducing coounting */
+    qInfo()<<"Reduce counting for access ";
+    QSqlQuery query1;
+    QString cmd1;
+    int counting;
+    cmd1 = "SELECT counting From NeiraIklan WHERE idiklan=:id_iklan";
+    query1.prepare(cmd1);
+    query1.bindValue(cmd1, NeiraParsd.QRString);
+
+    query1.exec();
+    counting = query1.value(0).toInt();
+    qInfo()<<"jumlah iklan : "<<counting;
+    counting = counting - 1;
+    qInfo()<<"counting min 1 : ";
+
+    qInfo()<<"update to counting";
+    QSqlQuery query2;
+    QString cmd2;
+    cmd2 = "update counting on NeiraIklan Where idiklan=:id_iklan";
+    query2.prepare(cmd2);
+    query2.bindValue(cmd2, NeiraParsd.idNum);
+    if(!query2.exec()){
+        qInfo()<<"gagal update counting";
+    } else {
+        qInfo()<<"update counting berhasil";
+    }
+
+
 
 }
 

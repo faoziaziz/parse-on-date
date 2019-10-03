@@ -25,6 +25,8 @@ public:
     void setDefault();
     void getPattern();
     void letsCombine();
+    void updateFlagParsed();
+    void reduceCounting();
 
 
     Database *aksesDB;
